@@ -5,7 +5,7 @@ const port = process.env.PORT || 5000;
 import registerRoute from "./controllers/register/route.js";
 import loginRoute from "./controllers/login/route.js";  
 import getMeRoute from "./controllers/getMe/route.js";
-import vendorPostRoute from "./controllers/vendor/post/route.js";
+import vendorRoute from "./controllers/vendor/route.js";
 import tokenVerify1, { tokenVerifyRole } from "./tokenVerify/tokenverify.js";
 
 const app = express();
@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", registerRoute);
 app.use("/api/auth", loginRoute);
 app.use("/api/auth/", tokenVerify1, getMeRoute);
-app.use("/api/vendor", tokenVerify1, tokenVerifyRole("vendor"), vendorPostRoute);
+app.use("/api/vendor", tokenVerify1, tokenVerifyRole("vendor"), vendorRoute);
 
 
 app.listen(port, () => {
