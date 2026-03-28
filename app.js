@@ -6,6 +6,7 @@ import registerRoute from "./controllers/register/route.js";
 import loginRoute from "./controllers/login/route.js";  
 import getMeRoute from "./controllers/getMe/route.js";
 import vendorRoute from "./controllers/vendor/route.js";
+import ordersRoute from "./controllers/oreders/route.js";
 import tokenVerify1, { tokenVerifyRole } from "./tokenVerify/tokenverify.js";
 
 const app = express();
@@ -22,6 +23,7 @@ app.use("/api/auth", registerRoute);
 app.use("/api/auth", loginRoute);
 app.use("/api/auth/", tokenVerify1, getMeRoute);
 app.use("/api/vendor", tokenVerify1, tokenVerifyRole("vendor"), vendorRoute);
+app.use("/api/user", tokenVerify1, tokenVerifyRole("user"),  ordersRoute);
 
 
 app.listen(port, () => {
