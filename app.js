@@ -8,6 +8,8 @@ import getMeRoute from "./controllers/getMe/route.js";
 import vendorRoute from "./controllers/vendor/route.js";
 import ordersRoute from "./controllers/oreders/route.js";
 import tokenVerify1, { tokenVerifyRole } from "./tokenVerify/tokenverify.js";
+import publicMoviesRoute from "./controllers/movies/route.js";
+import { loginLimiter } from "./controllers/rate_limit/rate_limiter.js";
 
 const app = express();
 app.use(cors());
@@ -24,6 +26,8 @@ app.use("/api/auth", loginRoute);
 app.use("/api/auth/", tokenVerify1, getMeRoute);
 app.use("/api/vendor", tokenVerify1, tokenVerifyRole("vendor"), vendorRoute);
 app.use("/api/user", tokenVerify1, tokenVerifyRole("user"),  ordersRoute);
+app.use("/api/public", tokenVerify1, loginLimiter, publicMoviesRoute);
+
 
 
 app.listen(port, () => {

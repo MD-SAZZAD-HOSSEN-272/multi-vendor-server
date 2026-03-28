@@ -10,6 +10,8 @@ router.post("/orders", async (req, res) => {
         const orders = await dbConnect("orders");
         const movies = await dbConnect("movies");
 
+        console.log(req.ip || req);
+
         const { movieId, orderType } = req.body; // orderType = "rent" or "purchase"
         const userId = req.user.id;
 
