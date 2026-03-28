@@ -4,6 +4,8 @@ import { ObjectId } from "mongodb";
 
 const router = express.Router();
 
+
+// post movie
 router.post("/movies", async (req, res) => {
     console.log('hit the api');
     try {
@@ -60,6 +62,7 @@ router.post("/movies", async (req, res) => {
 );
 
 
+// get movie
 router.get("/movies", async (req, res) => {
     try {
         const movies = await dbConnect("movies");
@@ -91,10 +94,8 @@ router.patch("/movies/:id", async (req, res) => {
     const movieId = req.params.id;
     const vendorId = req.user.id;
 
-    console.log('this api is hit');
 
     const movie = await movies.findOne({ _id: new ObjectId(movieId), vendorId });
-    console.log(movie);
 
     if (!movie) {
       return res.status(404).json({
@@ -126,6 +127,35 @@ router.patch("/movies/:id", async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Failed to update movie",
+    });
+  }
+});
+
+
+// Delete movie
+router.delete("/movies/:id", async (req, res) => {
+  try {
+    const movies = await dbConnect("movies");
+    const movieId = req.params.id;
+    const vendorId = req.user.id;
+
+    const result = await movies.deleteOne({ _id: new ObjectId(movieId), vendorId });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Movie not found or you don't have permission",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Movie deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to delete movie",
     });
   }
 });
