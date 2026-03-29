@@ -7,7 +7,6 @@ const router = express.Router();
 
 // post movie
 router.post("/movies", async (req, res) => {
-    console.log('hit the api');
     try {
         const movies = await dbConnect("movies");
 
