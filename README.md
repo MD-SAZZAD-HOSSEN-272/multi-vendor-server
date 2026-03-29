@@ -25,8 +25,8 @@ It supports role-based access for **admin, vendors, and users**, and includes al
 
 
  PORT=5000
-MONGO_URI=<your_mongo_connection_string>
-JWT_SECRET=<your_jwt_secret>
+MONGO_URI=mongodb+srv://multiVendor:U25fnrR62mLMtNhj@cluster0.gzsiij5.mongodb.net/?appName=Cluster0
+JWT_SECRET=sodkfpsjdf;lejpjkf;sg;kf;ljgoijsdl;kioepjfjdopgflkfj;lgjdfl;j;lkshdflkhasdlfkjhaslkdfnsfdfj;lkjdf;lkj;lkj;lkj;lkj;lkj;lkj;lkj;lkj;lkj;lkj;lkj;lk
 
 
 npm run dev
@@ -99,3 +99,18 @@ Endpoint	Method	Role	Description
 /api/admin/vendors              PSOT Admin Can Post Vendor
 /api/admin/vendors/:id          PATCH Admin can update user
 /api/admin/vendors/:id          DELETE admin can delte user
+
+
+
+6️⃣ API Response Strategy
+All responses follow a consistent format:
+{
+  "success": true,
+  "message": "Descriptive message",
+  "data": {}
+}
+
+
+Error handling uses proper HTTP status codes: 400, 401, 403, 500.
+Role-based middleware ensures protected routes are accessed only by authorized users.
+Pagination and filtering are applied for list endpoints.
