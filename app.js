@@ -28,7 +28,7 @@ app.use("/api/auth", loginRoute);
 app.use("/api/auth/", tokenVerify1, getMeRoute);
 app.use("/api/vendor", tokenVerify1, tokenVerifyRole("vendor"), vendorRoute);
 app.use("/api/user", tokenVerify1, tokenVerifyRole("user"),  ordersRoute);
-app.use("/api/public", tokenVerify1, loginLimiter, publicMoviesRoute);
+app.use("/api/public", tokenVerify1, publicMoviesRoute);
 app.use("/api/admin", tokenVerify1, adminRoute);
 app.use("/api/apply", tokenVerify1, veddorApplyRoute);
 

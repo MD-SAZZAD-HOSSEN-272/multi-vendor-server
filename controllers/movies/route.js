@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/movies", async (req, res) => {
   try {
     const movies = await dbConnect("movies");
-
+    console.log(movies, 'api is hit');
     // pagination
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 20;
