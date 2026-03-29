@@ -10,7 +10,7 @@ router.post("/register", async (req, res) => {
   try {
     const users = await dbConnect("users");
 
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
 
     // validation
     if (!name || !email || !password) {
@@ -37,7 +37,7 @@ router.post("/register", async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      role: role || "user",
+      role: "user",
       createdAt: new Date(),
     };
 

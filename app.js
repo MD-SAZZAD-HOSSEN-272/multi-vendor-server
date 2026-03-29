@@ -10,6 +10,7 @@ import ordersRoute from "./controllers/oreders/route.js";
 import tokenVerify1, { tokenVerifyRole } from "./tokenVerify/tokenverify.js";
 import publicMoviesRoute from "./controllers/movies/route.js";
 import adminRoute from "./controllers/admin/route.js";
+import veddorApplyRoute from "./controllers/vendorApply/route.js";
 import { loginLimiter } from "./controllers/rate_limit/rate_limiter.js";
 
 const app = express();
@@ -29,6 +30,7 @@ app.use("/api/vendor", tokenVerify1, tokenVerifyRole("vendor"), vendorRoute);
 app.use("/api/user", tokenVerify1, tokenVerifyRole("user"),  ordersRoute);
 app.use("/api/public", tokenVerify1, loginLimiter, publicMoviesRoute);
 app.use("/api/admin", tokenVerify1, adminRoute);
+app.use("/api/apply", tokenVerify1, veddorApplyRoute);
 
 
 
