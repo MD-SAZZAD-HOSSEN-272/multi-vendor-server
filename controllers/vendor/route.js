@@ -18,7 +18,10 @@ router.post("/movies", async (req, res) => {
             rentalPrice,
             releaseDate,
             thumbnail,
+            images,
         } = req.body;
+
+        console.log(req.body);
 
         // basic validation
         if (!title || !price || !genre) {
@@ -39,6 +42,7 @@ router.post("/movies", async (req, res) => {
             thumbnail: thumbnail || "",
             status: "published",
             createdAt: new Date(),
+            images: images || [],
         };
 
         const result = await movies.insertOne(newMovie);
