@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/movies", async (req, res) => {
     try {
         const movies = await dbConnect("movies");
-
+        req.body.genre = req.body.genre.toLowerCase();
         const {
             title,
             description,
@@ -20,7 +20,7 @@ router.post("/movies", async (req, res) => {
             thumbnail,
             images,
         } = req.body;
-
+        
         console.log(req.body);
 
         // basic validation

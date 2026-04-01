@@ -7,7 +7,6 @@ const router = express.Router();
 router.get("/movies", async (req, res) => {
   try {
     const movies = await dbConnect("movies");
-    console.log(movies, 'api is hit');
     // pagination
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 20;
@@ -15,11 +14,11 @@ router.get("/movies", async (req, res) => {
 
     // query params
     const { genre, vendorId, status, search, sortBy, order } = req.query;
-
+console.log(genre);
     // filter
     const filter = {};
 
-    if (genre) filter.genre = genre;
+    if (genre) filter.genre = genre.toLowerCase();
     if (vendorId) filter.vendorId = vendorId;
     if (status) filter.status = status;
 
